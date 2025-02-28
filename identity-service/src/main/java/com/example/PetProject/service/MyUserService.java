@@ -8,8 +8,10 @@ import com.example.PetProject.enums.Role;
 import com.example.PetProject.exception.AppException;
 import com.example.PetProject.exception.ErrorCode;
 import com.example.PetProject.mapper.MyUserMapper;
+import com.example.PetProject.mapper.ProfileMapper;
 import com.example.PetProject.repository.MyUserRepository;
 import com.example.PetProject.repository.RoleRepository;
+import com.example.PetProject.repository.httpCilent.ProfileClient;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -33,16 +35,19 @@ public class MyUserService {
     MyUserRepository myUserRepository;
     RoleRepository roleRepository;
     MyUserMapper myUserMapper;
+    ProfileMapper profileMapper;
     PasswordEncoder passwordEncoder;
+    ProfileClient profileClient;
 
 
     public MyUserResponse createMyUser(MyUserCreationRequest request) {
         MyUser myUser = myUserMapper.toMyUser(request);
         myUser.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        HashSet<String> roles = new HashSet<>();
-        roles.add(Role.USER.name());
-        //myUser.setRoles(roles);
+        HashSet<com.example.PetProject.entity.Role> roles = new HashSet<>();
+//        roles.add(Role.USER.name());
+        roleRepository.findById(Role.USER.name()).ifPresent(roles::add);
+        myUser.setRoles(roles);
 
         try {
             myUser = myUserRepository.save(myUser);
@@ -50,6 +55,11 @@ public class MyUserService {
         catch (DataIntegrityViolationException exception) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
+
+        var profileRequest = profileMapper.toProfileCreationRequest(request);
+
+        var profileResponse = profileClient.createProfile(profileRequest);
+        log.info("profileResponse:" + profileResponse.toString());
         return myUserMapper.toMyUserResponse(myUser);
     }
 

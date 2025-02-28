@@ -12,17 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MyUserCreationRequest {
-    @Size(min = 4, message = "USERNAME_INVALID")
-    String email;
-
-    @Size(min = 6, message = "INVALID_PASSWORD")
-    String password;
-
+public class ProfileCreationRequest {
     String firstName;
     String lastName;
-    @DobConstraint(min = 16, message = "INVALID_DOB")
     LocalDate dob;
-
     String city;
 }
