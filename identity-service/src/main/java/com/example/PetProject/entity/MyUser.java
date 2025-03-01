@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 @Data
@@ -22,9 +21,6 @@ public class MyUser {
     String email;
 
     String password;
-    String firstName;
-    String lastName;
-    LocalDate dob;
 
     @ManyToMany
     // Tự động tạo bảng user_role và tự động

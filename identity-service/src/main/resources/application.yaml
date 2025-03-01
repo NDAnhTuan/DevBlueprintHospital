@@ -17,3 +17,6 @@ spring:
     show-sql: true
 jwt:
   signerKey: "FZ53SRj+TB9MIVipkwxSeNxG4SIE7JQU/LPjLxuWrwoUfn7WQRBahoVphiyS30pa"
+app:
+  services:
+    profile: "http://localhost:8081/profile"

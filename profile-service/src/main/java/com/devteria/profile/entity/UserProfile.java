@@ -29,8 +29,6 @@ public class UserProfile {
 //    @Property("userId")
     @Column(name = "userId")
     String userId;
-
-    String username;
     String email;
 
     String firstName;

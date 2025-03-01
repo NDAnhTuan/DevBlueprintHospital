@@ -1,19 +1,19 @@
-package com.example.PetProject.dto.request;
+package com.example.PetProject.dto.response;
 
-import com.example.PetProject.validator.DobConstraint;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProfileCreationRequest {
-    String userId;
+public class UserProfileResponse {
+    String id;
+    String username;
+    String email;
     String firstName;
     String lastName;
     LocalDate dob;
