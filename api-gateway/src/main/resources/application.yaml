@@ -14,15 +14,15 @@ spring:
           uri: http://localhost:8080
           # ?i?u ki?n ?? gateway map endpoint
           predicates:
-            - Path=${app.api-prefix}/identity/**
-          filters:
-            - StripPrefix=2
+          - Path=/identity/**
+#          filters:
+#          - StripPrefix=2
         - id: profile_service
           uri: http://localhost:8081
           # ?i?u ki?n ?? gateway map endpoint
           # Chú ý r?ng không h? có /internal, không export, vì v?y s? không cho g?i post profile ;)
           predicates:
-            - Path=${app.api-prefix}/profile/**
+          - Path=/profile/**
           # C?t ?i custom prefix (c?t api là l?y ph?n sau ?? routing)
-          filters:
-            - StripPrefix=2
+#          filters:
+#          - StripPrefix=2
