@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+// Controller cho các api không public
 public class InternalUserProfileController {
     UserProfileService userProfileService;
 
