@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 public class MyUserController {
     MyUserService myUserService;
-    @PostMapping
+    @PostMapping("/signup")
     ApiResponse<MyUserResponse> createMyUser(@RequestBody @Valid MyUserCreationRequest request) {
         ApiResponse apiResponse = new ApiResponse<MyUserResponse>();
         apiResponse.setCode(100);

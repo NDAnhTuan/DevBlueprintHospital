@@ -50,9 +50,10 @@ public class UserProfileService {
 
     public UserProfileResponse getMyProfile() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info(authentication.getName());
         String userId = authentication.getName();
 
-        var profile = userProfileRepository.findByUserId(userId)
+        var profile = userProfileRepository.findByEmail(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         return userProfileMapper.toUserProfileReponse(profile);
