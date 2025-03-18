@@ -10,12 +10,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProfileCreationRequest {
-    String userId;
-    String username;
-    String email;
+public class PatientCreationRequest {
     String firstName;
     String lastName;
+    String gender;
+    String ethnicity;
+    String patientType;
+    String relativeName;
     LocalDate dob;
-    String city;
+    String address;
+    String insuranceNumber;
+    String insuranceType;
+    String hospitalLevel;
 }
