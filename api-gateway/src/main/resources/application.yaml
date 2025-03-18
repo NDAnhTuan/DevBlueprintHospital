@@ -26,3 +26,12 @@ spring:
           # Cat di custom prefix (cat api/v1 lay phan sau de routing)
           filters:
           - StripPrefix=2
+        - id: patient_service
+          uri: http://localhost:8082
+          # Dieu kien de gateway map endpoint
+          # Khong he co /internal, khong export, vi vay se khong cho gui post profile ;)
+          predicates:
+            - Path=${app.api-prefix}/patient/**
+          # Cat di custom prefix (cat api/v1 lay phan sau de routing)
+          filters:
+            - StripPrefix=2
