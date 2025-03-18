@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.devblueprint</groupId>
-	<artifactId>another-service</artifactId>
+	<artifactId>patient-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>another-service</name>
+	<name>patient-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
