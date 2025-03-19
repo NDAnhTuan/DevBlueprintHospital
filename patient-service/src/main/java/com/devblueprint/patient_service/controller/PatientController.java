@@ -35,8 +35,8 @@ public class PatientController {
     }
 
     @GetMapping("/patient/my-patient")
-    ApiResponse<PatientResponse> getMyPatient() {
-        return ApiResponse.<PatientResponse>builder()
+    ApiResponse<List<PatientResponse>> getMyPatient() {
+        return ApiResponse.<List<PatientResponse>>builder()
                 .result(patientService.getMyPatient())
                 .build();
     }

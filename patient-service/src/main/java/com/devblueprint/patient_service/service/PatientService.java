@@ -2,6 +2,7 @@ package com.devblueprint.patient_service.service;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -27,32 +28,37 @@ public class PatientService {
     PatientMapper patientMapper;
 
     public PatientResponse createPatient(PatientCreationRequest request) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
         Patient patient = patientMapper.toPatient(request);
-        patient = patientRepository.save(patient);
-
+        patient.setUserId(userId);
+        try {
+            patient = patientRepository.save(patient);
+        }
+        catch (DataIntegrityViolationException exception) {
+            throw new AppException(ErrorCode.PATIENT_EXISTED);
+        }
         return patientMapper.toPatientResponse(patient);
     }
 
     public PatientResponse getPatient(String id) {
-        Patient patient = patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient not found"));
+        Patient patient = patientRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.PATIENT_NOT_EXISTED));
 
         return patientMapper.toPatientResponse(patient);
     }
 
-    //    @PreAuthorize("hasRole('ADMIN')")
     public List<PatientResponse> getAllPatients() {
         var patients = patientRepository.findAll();
 
         return patients.stream().map(patientMapper::toPatientResponse).toList();
     }
 
-    public PatientResponse getMyPatient() {
+    public List<PatientResponse> getMyPatient() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info(authentication.getName());
         String userId = authentication.getName();
 
-        var patient =
-                patientRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.PATIENT_NOT_EXISTED));
-        return patientMapper.toPatientResponse(patient);
+        var patients =
+                patientRepository.findAllByUserId(userId);
+        return patients.stream().map(patientMapper::toPatientResponse).toList();
     }
 }

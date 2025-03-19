@@ -30,6 +30,8 @@
 		<java.version>17</java.version>
 		<!--Set up version refer https://spring.io/projects/spring-cloud -->
 		<spring-cloud.version>2024.0.0</spring-cloud.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
