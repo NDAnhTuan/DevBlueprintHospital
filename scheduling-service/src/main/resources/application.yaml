@@ -1,0 +1,20 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /scheduling
+
+
+spring:
+  application:
+    name: scheduling-service
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres"
+    username: postgres
+    password: 123456
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
