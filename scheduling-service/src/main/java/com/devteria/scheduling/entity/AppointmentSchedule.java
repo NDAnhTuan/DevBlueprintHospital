@@ -20,19 +20,40 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 //@Node("user_profile")
 @Entity
-public class ApopointmentSchedule {
+
+@Table(name = "doctors", uniqueConstraints = {@UniqueConstraint(columnNames = "userId")})
+@Table(name = "appointments")
+public class Doctor {
     @Id
-//    @GeneratedValue(generatorClass = UUIDStringGenerator.class)
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-//    @Property("userId")
-    @Column(name = "userId")
-    String userId;
-    String email;
+    @Column(nullable = false, unique = true)
+    String userId;  // ID từ hệ thống xác thực
 
     String firstName;
     String lastName;
-    LocalDate dob;
-    String city;
+    String specialty;
+    String phoneNumber;
+    String email;
+}
+
+public class Appointment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
+    Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
+    Patient patient;
+
+    @Column(nullable = false)
+    LocalDateTime appointmentTime;
+
+    @Enumerated(EnumType.STRING)
+    AppointmentStatus status; // Đặt - Hủy - Sửa
 }

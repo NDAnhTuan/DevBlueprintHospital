@@ -13,12 +13,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Table(name = "patient", uniqueConstraints = {@UniqueConstraint(columnNames = "insuaranceNumber")})
 
 public class Patient
 {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
+
+    @Column(nullable = false, unique = true)
     String userId;
     String firstName;
     String lastName;
@@ -28,7 +31,9 @@ public class Patient
     String relativeName;
     LocalDate dob;
     String address;
+    String hospitalLevel;
+
+    @Column(nullable = false,unique = true) //Đảm bảo insuranceNumber unique để tìm Bệnh nhân
     String insuranceNumber;
     String insuranceType;
-    String hospitalLevel;
 }
