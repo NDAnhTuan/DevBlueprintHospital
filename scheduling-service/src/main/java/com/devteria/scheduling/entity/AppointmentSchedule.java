@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 //@Node("user_profile")
 @Entity
-public class UserProfile {
+public class ApopointmentSchedule {
     @Id
 //    @GeneratedValue(generatorClass = UUIDStringGenerator.class)
     @GeneratedValue(strategy = GenerationType.UUID)
