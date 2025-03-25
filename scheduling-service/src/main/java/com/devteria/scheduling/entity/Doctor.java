@@ -1,7 +1,5 @@
 package com.devteria.scheduling.entity;
 
-import java.time.LocalDateTime;
-
 // import org.springframework.data.neo4j.core.schema.GeneratedValue;
 // import org.springframework.data.neo4j.core.schema.Id;
 // import org.springframework.data.neo4j.core.schema.Node;
@@ -40,24 +38,4 @@ public class Doctor {
     String specialty;
     String phoneNumber;
     String email;
-}
-@Table(name = "appointments")
-public class Appointment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
-    Doctor doctor;
-
-    @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    Patient patient;
-
-    @Column(nullable = false)
-    LocalDateTime appointmentTime;
-
-    @Enumerated(EnumType.STRING)
-    AppointmentStatus status; // Đặt - Hủy - Sửa
 }
