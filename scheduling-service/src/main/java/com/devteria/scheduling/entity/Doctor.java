@@ -23,24 +23,24 @@ import lombok.experimental.FieldDefaults;
 
 @Entity
 
-// @Table(
-//         name = "doctors",
-//         uniqueConstraints = {@UniqueConstraint(columnNames = "userId")})
+@Table(
+        name = "doctors",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "userId")})
 
-// public class Doctor {
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.UUID)
-//     String id;
+public class Doctor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    String id;
 
-//     @Column(nullable = false, unique = true)
-//     String userId; // ID từ hệ thống xác thực
+    @Column(nullable = false, unique = true)
+    String userId; // ID từ hệ thống xác thực
 
-//     String firstName;
-//     String lastName;
-//     String specialty;
-//     String phoneNumber;
-//     String email;
-// }
+    String firstName;
+    String lastName;
+    String specialty;
+    String phoneNumber;
+    String email;
+}
 @Table(name = "appointments")
 public class Appointment {
     @Id
