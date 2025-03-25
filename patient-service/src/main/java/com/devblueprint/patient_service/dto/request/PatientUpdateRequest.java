@@ -1,18 +1,16 @@
 package com.devblueprint.patient_service.dto.request;
 
+import java.time.LocalDate;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDate;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-public class PatientUpdateRequest
-{
+public class PatientUpdateRequest {
     String firstName;
     String lastName;
     String gender;

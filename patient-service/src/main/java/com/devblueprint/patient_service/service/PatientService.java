@@ -34,15 +34,15 @@ public class PatientService {
         patient.setUserId(userId);
         try {
             patient = patientRepository.save(patient);
-        }
-        catch (DataIntegrityViolationException exception) {
+        } catch (DataIntegrityViolationException exception) {
             throw new AppException(ErrorCode.PATIENT_EXISTED);
         }
         return patientMapper.toPatientResponse(patient);
     }
 
     public PatientResponse getPatient(String id) {
-        Patient patient = patientRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.PATIENT_NOT_EXISTED));
+        Patient patient =
+                patientRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.PATIENT_NOT_EXISTED));
 
         return patientMapper.toPatientResponse(patient);
     }
@@ -57,8 +57,7 @@ public class PatientService {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
 
-        var patients =
-                patientRepository.findAllByUserId(userId);
+        var patients = patientRepository.findAllByUserId(userId);
         return patients.stream().map(patientMapper::toPatientResponse).toList();
     }
 }
