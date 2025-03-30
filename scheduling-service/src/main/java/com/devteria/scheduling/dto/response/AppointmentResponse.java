@@ -1,6 +1,6 @@
 package com.devteria.scheduling.dto.response;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -10,12 +10,11 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserProfileResponse {
+public class AppointmentResponse {
     String id;
-    String username;
-    String email;
-    String firstName;
-    String lastName;
-    LocalDate dob;
-    String city;
+    String patientId;
+    String doctorId;
+    LocalDateTime appointmentDateTime;
+    String reason;
+    String status;
 }
