@@ -50,4 +50,12 @@ public class AppointmentController {
                 .result("Appointment cancelled successfully")
                 .build();
     }
+
+    @PutMapping("/update/{appointmentId}")
+    ApiResponse<AppointmentResponse> updateAppointment(
+            @PathVariable String appointmentId, @RequestBody AppointmentRequest request) {
+        return ApiResponse.<AppointmentResponse>builder()
+                .result(appointmentService.updateAppointment(appointmentId, request))
+                .build();
+    }
 }

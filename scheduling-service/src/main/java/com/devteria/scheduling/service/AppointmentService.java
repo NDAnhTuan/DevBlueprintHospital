@@ -40,6 +40,37 @@ public class AppointmentService {
         return appointmentMapper.toAppointmentResponse(appointmentRepository.save(appointment));
     }
 
+    // Update an existing appointment
+    // Update an existing appointment
+    public AppointmentResponse updateAppointment(String appointmentId, AppointmentRequest request) {
+        // Tìm appointment bằng ID
+        Appointment appointment = appointmentRepository
+                .findById(appointmentId)
+                .orElseThrow(() -> new AppException(ErrorCode.APPOINTMENT_NOT_FOUND));
+
+        // Kiểm tra xung đột lịch hẹn nếu thời gian hẹn thay đổi
+        // Bỏ qua kiểm tra nếu thời gian giữ nguyên
+        if (!appointment.getAppointmentDateTime().equals(request.getAppointmentDateTime())) {
+            boolean conflict = appointmentRepository.existsByDoctorIdAndTimeConflict(
+                    request.getDoctorId(), request.getAppointmentDateTime());
+
+            if (conflict) {
+                throw new AppException(ErrorCode.APPOINTMENT_NOT_AVAILABLE);
+            }
+        }
+
+        // Cập nhật thông tin cuộc hẹn
+        appointment.setDoctorId(request.getDoctorId());
+        appointment.setPatientId(request.getPatientId());
+        appointment.setAppointmentDateTime(request.getAppointmentDateTime());
+        appointment.setReason(request.getReason());
+
+        log.info("Updating appointment: {}", appointmentId);
+
+        appointment = appointmentRepository.save(appointment);
+        return appointmentMapper.toAppointmentResponse(appointment);
+    }
+
     // Get an appointment by doctor or patient
     public List<AppointmentResponse> getMyAppointments(String doctorId, String patientId) {
         if (doctorId == null && patientId == null) {
