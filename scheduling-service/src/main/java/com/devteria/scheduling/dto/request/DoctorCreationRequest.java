@@ -1,6 +1,5 @@
 package com.devteria.scheduling.dto.request;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 public class DoctorCreationRequest {

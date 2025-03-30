@@ -22,16 +22,12 @@ import lombok.experimental.FieldDefaults;
 @Entity
 
 @Table(
-        name = "doctors",
-        uniqueConstraints = {@UniqueConstraint(columnNames = "userId")})
+        name = "doctors" )
 
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
-
-    @Column(nullable = false, unique = true)
-    String userId; // ID từ hệ thống xác thực
 
     String firstName;
     String lastName;
