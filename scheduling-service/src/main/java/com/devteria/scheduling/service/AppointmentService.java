@@ -1,5 +1,6 @@
 package com.devteria.scheduling.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class AppointmentService {
 
     // Create a new appointment
     public AppointmentResponse createAppointment(AppointmentRequest request) {
+        if (request.getAppointmentDateTime() == null) {
+            request.setAppointmentDateTime(LocalDateTime.now());
+        }
         boolean conflict = appointmentRepository.existsByDoctorIdAndTimeConflict(
                 request.getDoctorId(), request.getAppointmentDateTime());
 

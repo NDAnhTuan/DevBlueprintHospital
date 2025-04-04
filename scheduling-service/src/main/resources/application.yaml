@@ -7,12 +7,9 @@ spring:
   application:
     name: scheduling-service
   datasource:
-    # url: "jdbc:postgresql://dpg-cvgkvannoe9s73ce60u0-a.singapore-postgres.render.com:5432/appointment_scheduling_swre"
-    # username: appointment_scheduling_swre_user
-    # password: yEf1lc3NFAVyNIt5Ae0Fq43Arg5S0Jdn
-    url: "jdbc:postgresql://localhost:5432/postgres"
-    username: postgres
-    password: 50994
+     url: "jdbc:postgresql://dpg-cvgkvannoe9s73ce60u0-a.singapore-postgres.render.com:5432/appointment_scheduling_swre"
+     username: appointment_scheduling_swre_user
+     password: yEf1lc3NFAVyNIt5Ae0Fq43Arg5S0Jdn
   jpa:
     properties:
       hibernate:
