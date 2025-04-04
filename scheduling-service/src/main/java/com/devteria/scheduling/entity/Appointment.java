@@ -20,16 +20,18 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(nullable = false)
-    String patientId;
-
-    @Column(nullable = false)
+    @Column(name = "doctor_id", nullable = false)
     String doctorId;
 
-    @Column(nullable = false)
-    LocalDateTime appointmentDateTime;
+    @Column(name = "patient_id", nullable = false)
+    String patientId;
 
+    @Column(name = "reason")
     String reason;
 
+    @Column(name = "status")
     String status;
+
+    @Column(name = "appointment_date_time", nullable = false)
+    LocalDateTime appointmentDateTime;
 }

@@ -27,6 +27,7 @@ import lombok.experimental.FieldDefaults;
 public class AppointmentController {
     AppointmentService appointmentService;
 
+    // Create a new appointment
     @PostMapping
     ApiResponse<AppointmentResponse> createAppointment(@RequestBody AppointmentRequest request) {
         return ApiResponse.<AppointmentResponse>builder()
@@ -34,6 +35,7 @@ public class AppointmentController {
                 .build();
     }
 
+    // Get an appointment by doctorId or patientId
     @GetMapping
     ApiResponse<List<AppointmentResponse>> getMyAppointments(
             @RequestParam(required = false) String doctorId, @RequestParam(required = false) String patientId) {
@@ -43,19 +45,20 @@ public class AppointmentController {
                 .build();
     }
 
-    @PutMapping("/{appointmentId}")
-    ApiResponse<String> cancelAppointment(@PathVariable String appointmentId) {
-        appointmentService.cancelAppointment(appointmentId);
-        return ApiResponse.<String>builder()
-                .result("Appointment cancelled successfully")
-                .build();
-    }
-
     @PutMapping("/update/{appointmentId}")
     ApiResponse<AppointmentResponse> updateAppointment(
             @PathVariable String appointmentId, @RequestBody AppointmentRequest request) {
         return ApiResponse.<AppointmentResponse>builder()
                 .result(appointmentService.updateAppointment(appointmentId, request))
+                .build();
+    }
+
+    // Cancel an appointment
+    @PutMapping("/cancel/{appointmentId}")
+    ApiResponse<String> cancelAppointment(@PathVariable String appointmentId) {
+        appointmentService.cancelAppointment(appointmentId);
+        return ApiResponse.<String>builder()
+                .result("Appointment cancelled successfully")
                 .build();
     }
 }

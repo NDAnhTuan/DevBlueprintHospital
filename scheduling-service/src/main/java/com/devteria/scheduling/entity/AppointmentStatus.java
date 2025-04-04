@@ -1,7 +1,7 @@
 package com.devteria.scheduling.entity;
 
 public enum AppointmentStatus {
-    CANCELED,
+    CANCELLED,
     APPROVED,
     PENDING
 }

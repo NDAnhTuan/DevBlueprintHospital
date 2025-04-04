@@ -19,7 +19,8 @@ public enum ErrorCode {
     PROFILE_NOT_EXISTED(1009, "Profile not existed", HttpStatus.NOT_FOUND),
     INVALID_REQUEST(1010, "doctorId or patientId must be provided", HttpStatus.BAD_REQUEST),
     APPOINTMENT_NOT_FOUND(1011, "Appointment not found", HttpStatus.NOT_FOUND),
-    APPOINTMENT_NOT_AVAILABLE(1012, "Doctor has another appointment within 1 hour", HttpStatus.NOT_FOUND);
+    APPOINTMENT_NOT_AVAILABLE(1012, "Doctor has another appointment within 1 hour", HttpStatus.NOT_FOUND),
+    APPOINTMENT_TIME_INVALID(1013, "Appointment time must be between 07:00 and 16:00", HttpStatus.NOT_FOUND);
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

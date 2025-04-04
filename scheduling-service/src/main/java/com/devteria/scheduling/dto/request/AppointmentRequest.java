@@ -15,4 +15,5 @@ public class AppointmentRequest {
     String doctorId;
     LocalDateTime appointmentDateTime;
     String reason;
+    String status;
 }
