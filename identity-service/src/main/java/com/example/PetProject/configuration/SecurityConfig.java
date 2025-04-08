@@ -37,6 +37,8 @@ public class SecurityConfig {
         // Cấu hình cho các request không cần jwt
         httpSecurity.authorizeHttpRequests(request ->
                 request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
+                        .permitAll()
                         .anyRequest()
                         .authenticated());
         // Cấu hình cho xác thực bằng jwt

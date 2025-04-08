@@ -10,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DoctorCreationResponse {
     String id;
-    String userId;
     String firstName;
     String lastName;
     String specialty;

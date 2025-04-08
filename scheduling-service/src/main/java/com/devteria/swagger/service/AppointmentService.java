@@ -46,6 +46,9 @@ public class AppointmentService {
     }
 
     // Create a new appointment
+
+    // Gọi từ Patient và Doctor để kiểm tra id đó có tồn tại không (2 api này trả về boolean)
+    // Nghĩa làm api của Doctor, Chương làm của Patient
     public AppointmentResponse createAppointment(AppointmentRequest request) {
         if (request.getAppointmentDateTime() == null) {
             request.setAppointmentDateTime(LocalDateTime.now());
@@ -63,7 +66,10 @@ public class AppointmentService {
         }
 
         Appointment appointment = appointmentMapper.toAppointment(request);
-        appointment.setStatus("PENDING");
+
+
+        // check DoctorId và PatientId here => new AppException(ErrorCode.Patient_not_existed)
+
 
         return appointmentMapper.toAppointmentResponse(appointmentRepository.save(appointment));
     }
@@ -91,11 +97,15 @@ public class AppointmentService {
         // Use the Mapper
         appointmentMapper.updateAppointment(appointment, request);
 
+        // check DoctorId và PatientId here => new AppException(ErrorCode.Patient_not_existed)
+
         Appointment updated = appointmentRepository.save(appointment);
         return appointmentMapper.toAppointmentResponse(updated);
     }
 
     // Get an appointment by doctor or patient
+    // CÁC HÀM GET CẦN GỌI THÊM GET BY ID PATIENT VÀ DOCTOR, NGHĨA LÀ MỌI NGƯỜI PHẢI ĐỊNH NGHĨA RESPONSE
+    // CỦA PATIENT VÀ DOCTOR TRONG APPOINTMENT SERVICE, SAU ĐÓ THÊM VÀO APPOINTMENT RESPONSE (HƯỚNG DẪN TRONG PROFILE-SERVICE)
     public List<AppointmentResponse> getMyAppointments(String doctorId, String patientId) {
         if (doctorId == null && patientId == null) {
             throw new AppException(ErrorCode.INVALID_REQUEST);
