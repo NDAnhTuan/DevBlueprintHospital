@@ -31,6 +31,11 @@ public class AppointmentService {
 
     // Validate the appointment time range, must be from 07:00 to 16:00
     private void validateAppointmentTime(LocalDateTime appointmentDateTime) {
+        // Skip validation if it is null
+        if (appointmentDateTime == null) {
+            return;
+        }
+
         LocalTime start = LocalTime.of(7, 0);
         LocalTime end = LocalTime.of(16, 0);
         LocalTime appointmentTime = appointmentDateTime.toLocalTime();
@@ -46,8 +51,10 @@ public class AppointmentService {
             request.setAppointmentDateTime(LocalDateTime.now());
         }
 
+        // Validate the time range
         validateAppointmentTime(request.getAppointmentDateTime());
 
+        // Check if the doctor has an appointment within 1 hour of the requested time
         boolean conflict = appointmentRepository.existsByDoctorIdAndTimeConflict(
                 request.getDoctorId(), request.getAppointmentDateTime());
 
@@ -67,20 +74,22 @@ public class AppointmentService {
         Appointment appointment =
                 appointmentRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.APPOINTMENT_NOT_FOUND));
 
-        boolean conflict = appointmentRepository.existsByDoctorIdAndTimeConflict(
-                request.getDoctorId(), request.getAppointmentDateTime());
+        // If the appointmentDateTime is not null, validate the time
+        if (request.getAppointmentDateTime() != null) {
+            // Validate the time range
+            validateAppointmentTime(request.getAppointmentDateTime());
 
-        validateAppointmentTime(request.getAppointmentDateTime());
+            // Check if the doctor has an appointment within 1 hour of the requested time
+            boolean conflict = appointmentRepository.existsByDoctorIdAndTimeConflict(
+                    request.getDoctorId(), request.getAppointmentDateTime());
 
-        if (conflict && !appointment.getAppointmentDateTime().equals(request.getAppointmentDateTime())) {
-            throw new AppException(ErrorCode.APPOINTMENT_NOT_AVAILABLE);
+            if (conflict && !appointment.getAppointmentDateTime().equals(request.getAppointmentDateTime())) {
+                throw new AppException(ErrorCode.APPOINTMENT_NOT_AVAILABLE);
+            }
         }
 
-        appointment.setDoctorId(request.getDoctorId());
-        appointment.setPatientId(request.getPatientId());
-        appointment.setAppointmentDateTime(request.getAppointmentDateTime());
-        appointment.setReason(request.getReason());
-        appointment.setStatus(request.getStatus());
+        // Use the Mapper
+        appointmentMapper.updateAppointment(appointment, request);
 
         Appointment updated = appointmentRepository.save(appointment);
         return appointmentMapper.toAppointmentResponse(updated);
