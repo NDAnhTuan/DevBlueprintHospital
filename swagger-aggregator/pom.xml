@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dev</groupId>
-	<artifactId>doctor-service</artifactId>
+	<artifactId>swagger</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>doctor-service</name>
-	<description>Doctor service</description>
+	<name>swagger</name>
+	<description>swagger</description>
 	<properties>
 		<java.version>17</java.version>
 		<projectlombok-lombok.version>1.18.30</projectlombok-lombok.version>
