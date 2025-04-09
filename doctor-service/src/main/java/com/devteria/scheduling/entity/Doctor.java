@@ -27,7 +27,7 @@ import lombok.experimental.FieldDefaults;
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
+    String userId;
 
     String firstName;
     String lastName;

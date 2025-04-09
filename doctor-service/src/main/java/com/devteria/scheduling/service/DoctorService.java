@@ -45,7 +45,7 @@ public class DoctorService {
                 .orElseThrow(() -> new AppException(ErrorCode.DOCTOR_NOT_EXISTED));
         
         Doctor updatedDoctor = doctorMapper.toDoctor(request);
-        updatedDoctor.setId(id);
+        updatedDoctor.setUserId(id);
         
         updatedDoctor = doctorRepository.save(updatedDoctor);
         return doctorMapper.toDoctorCreationResponse(updatedDoctor);
@@ -57,4 +57,9 @@ public class DoctorService {
         }
         doctorRepository.deleteById(id);
     }
+
+    public  Boolean checkId(String doctorId){
+        return doctorRepository.existsById(doctorId);
+    }
+
 } 
