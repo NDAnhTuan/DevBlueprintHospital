@@ -1,8 +1,6 @@
 package com.devblueprint.patient_service.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.devblueprint.patient_service.dto.ApiResponse;
 import com.devblueprint.patient_service.dto.request.PatientCreationRequest;
@@ -24,6 +22,13 @@ public class InternalPatientController {
     ApiResponse<PatientResponse> createPatient(@RequestBody PatientCreationRequest request) {
         return ApiResponse.<PatientResponse>builder()
                 .result(patientService.createPatient(request))
+                .build();
+    }
+
+    @GetMapping("/check-id")
+    ApiResponse<Boolean> checkExistingPatient(@PathVariable String patientId) {
+        return ApiResponse.<Boolean>builder()
+                .result(patientService.checkId(patientId))
                 .build();
     }
 }
