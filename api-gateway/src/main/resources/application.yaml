@@ -4,6 +4,16 @@ server:
 app:
   api-prefix: /api/v1
 
+spring-doc:
+  swagger-ui:
+    urls:
+      - name: identity_service
+        url: http://localhost:8080/identity/v3/api-docs
+      - name: profile_service
+        url: http://localhost:8081/profile/v3/api-docs
+      - name: doctor_service
+        url: http://localhost:8084/doctor/v3/api-docs
+
 spring:
   application:
     name: api-gateway
@@ -41,6 +51,15 @@ spring:
           # Khong he co /internal, khong export, vi vay se khong cho gui post profile ;)
           predicates:
             - Path=${app.api-prefix}/scheduling/**
+          # Cat di custom prefix (cat api/v1 lay phan sau de routing)
+          filters:
+            - StripPrefix=2
+        - id: doctor_service
+          uri: http://localhost:8084
+          # Dieu kien de gateway map endpoint
+          # Khong he co /internal, khong export, vi vay se khong cho gui post profile ;)
+          predicates:
+            - Path=${app.api-prefix}/doctor/**
           # Cat di custom prefix (cat api/v1 lay phan sau de routing)
           filters:
             - StripPrefix=2

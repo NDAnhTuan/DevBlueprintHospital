@@ -1,0 +1,14 @@
+server:
+  port: 8880
+  servlet:
+    context-path: /swagger
+
+spring-doc:
+  swagger-ui:
+    urls:
+      - name: identity
+        url: http://localhost:8080/identity/v3/api-docs
+      - name: profile
+        url: http://localhost:8081/profile/v3/api-docs
+      - name: doctor
+        url: http://localhost:8084/doctor/v3/api-docs

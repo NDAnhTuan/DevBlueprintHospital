@@ -7,7 +7,7 @@ spring:
   application:
     name: doctor-service
   datasource:
-    url: "jdbc:postgresql://appointment_scheduling_swre_user:yEf1lc3NFAVyNIt5Ae0Fq43Arg5S0Jdn@dpg-cvgkvannoe9s73ce60u0-a.singapore-postgres.render.com/appointment_scheduling_swre"
+    url: "jdbc:postgresql://dpg-cvgkvannoe9s73ce60u0-a.singapore-postgres.render.com/appointment_scheduling_swre"
     username: appointment_scheduling_swre_user
     password: yEf1lc3NFAVyNIt5Ae0Fq43Arg5S0Jdn
   jpa:
