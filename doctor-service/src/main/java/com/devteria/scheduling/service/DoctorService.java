@@ -45,7 +45,7 @@ public class DoctorService {
                 .orElseThrow(() -> new AppException(ErrorCode.DOCTOR_NOT_EXISTED));
         
         Doctor updatedDoctor = doctorMapper.toDoctor(request);
-        updatedDoctor.setUserId(id);
+        updatedDoctor.setId(id);
         
         updatedDoctor = doctorRepository.save(updatedDoctor);
         return doctorMapper.toDoctorCreationResponse(updatedDoctor);
