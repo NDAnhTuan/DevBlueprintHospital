@@ -1,10 +1,10 @@
-// package com.devteria.scheduling.mapper;
+// package com.devteria.swagger.mapper;
 //
 // import org.mapstruct.Mapper;
 //
-// import com.devteria.scheduling.dto.request.ProfileCreationRequest;
-// import com.devteria.scheduling.dto.response.UserProfileResponse;
-// import com.devteria.scheduling.entity.UserProfile;
+// import com.devteria.swagger.dto.request.ProfileCreationRequest;
+// import com.devteria.swagger.dto.response.UserProfileResponse;
+// import com.devteria.swagger.entity.UserProfile;
 //
 // @Mapper(componentModel = "spring")
 // public interface UserProfileMapper {

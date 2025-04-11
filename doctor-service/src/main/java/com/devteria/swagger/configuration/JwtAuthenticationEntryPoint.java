@@ -2,6 +2,7 @@ package com.devteria.swagger.configuration;
 
 import java.io.IOException;
 
+import com.devteria.swagger.exception.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -10,7 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 import com.devteria.swagger.dto.ApiResponse;
-import com.devteria.swagger.exception.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {

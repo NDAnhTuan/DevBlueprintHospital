@@ -57,4 +57,7 @@ public class DoctorService {
         }
         doctorRepository.deleteById(id);
     }
+    public  Boolean checkId(String doctorId){
+        return doctorRepository.existsById(doctorId);
+    }
 } 

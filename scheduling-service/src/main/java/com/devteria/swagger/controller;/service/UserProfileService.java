@@ -1,17 +1,17 @@
-// package com.devteria.scheduling.service;
+// package com.devteria.swagger.service;
 //
 // import java.util.List;
 //
 // import org.springframework.security.core.context.SecurityContextHolder;
 // import org.springframework.stereotype.Service;
 //
-// import com.devteria.scheduling.dto.request.ProfileCreationRequest;
-// import com.devteria.scheduling.dto.response.UserProfileResponse;
-// import com.devteria.scheduling.entity.UserProfile;
-// import com.devteria.scheduling.exception.AppException;
-// import com.devteria.scheduling.exception.ErrorCode;
-// import com.devteria.scheduling.mapper.AppointmentMapper;
-// import com.devteria.scheduling.repository.UserProfileRepository;
+// import com.devteria.swagger.dto.request.ProfileCreationRequest;
+// import com.devteria.swagger.dto.response.UserProfileResponse;
+// import com.devteria.swagger.entity.UserProfile;
+// import com.devteria.swagger.exception.AppException;
+// import com.devteria.swagger.exception.ErrorCode;
+// import com.devteria.swagger.mapper.AppointmentMapper;
+// import com.devteria.swagger.repository.UserProfileRepository;
 //
 // import lombok.AccessLevel;
 // import lombok.RequiredArgsConstructor;
