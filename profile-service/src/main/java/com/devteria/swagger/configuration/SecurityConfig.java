@@ -1,4 +1,4 @@
-package com.devteria.scheduling.configuration;
+package com.devteria.swagger.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

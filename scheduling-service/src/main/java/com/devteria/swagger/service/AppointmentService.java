@@ -14,7 +14,10 @@ import com.devteria.swagger.entity.Appointment;
 import com.devteria.swagger.exception.AppException;
 import com.devteria.swagger.exception.ErrorCode;
 import com.devteria.swagger.mapper.AppointmentMapper;
+import com.devteria.swagger.mapper.AppointmentResponseMapper;
 import com.devteria.swagger.repository.AppointmentRepository;
+import com.devteria.swagger.repository.httpCilent.DoctorService;
+import com.devteria.swagger.repository.httpCilent.PatientService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,9 @@ import lombok.extern.slf4j.Slf4j;
 public class AppointmentService {
     AppointmentRepository appointmentRepository;
     AppointmentMapper appointmentMapper;
+    AppointmentResponseMapper appointmentResponseMapper;
+    PatientService patientService;
+    DoctorService doctorService;
 
     // Validate the appointment time range, must be from 07:00 to 16:00
     private void validateAppointmentTime(LocalDateTime appointmentDateTime) {
@@ -66,12 +72,11 @@ public class AppointmentService {
         }
 
         Appointment appointment = appointmentMapper.toAppointment(request);
+        appointmentRepository.save(appointment);
 
-
-        // check DoctorId và PatientId here => new AppException(ErrorCode.Patient_not_existed)
-
-
-        return appointmentMapper.toAppointmentResponse(appointmentRepository.save(appointment));
+        AppointmentResponse appointmentResponse =
+                appointmentResponseMapper.toAppointmentResponse(appointment, patientService, doctorService);
+        return appointmentResponse;
     }
 
     // Update an existing appointment
@@ -98,14 +103,15 @@ public class AppointmentService {
         appointmentMapper.updateAppointment(appointment, request);
 
         // check DoctorId và PatientId here => new AppException(ErrorCode.Patient_not_existed)
-
-        Appointment updated = appointmentRepository.save(appointment);
-        return appointmentMapper.toAppointmentResponse(updated);
+        AppointmentResponse appointmentResponse =
+                appointmentResponseMapper.toAppointmentResponse(appointment, patientService, doctorService);
+        return appointmentResponse;
     }
 
     // Get an appointment by doctor or patient
     // CÁC HÀM GET CẦN GỌI THÊM GET BY ID PATIENT VÀ DOCTOR, NGHĨA LÀ MỌI NGƯỜI PHẢI ĐỊNH NGHĨA RESPONSE
-    // CỦA PATIENT VÀ DOCTOR TRONG APPOINTMENT SERVICE, SAU ĐÓ THÊM VÀO APPOINTMENT RESPONSE (HƯỚNG DẪN TRONG PROFILE-SERVICE)
+    // CỦA PATIENT VÀ DOCTOR TRONG APPOINTMENT SERVICE, SAU ĐÓ THÊM VÀO APPOINTMENT RESPONSE (HƯỚNG DẪN TRONG
+    // PROFILE-SERVICE)
     public List<AppointmentResponse> getMyAppointments(String doctorId, String patientId) {
         if (doctorId == null && patientId == null) {
             throw new AppException(ErrorCode.INVALID_REQUEST);
@@ -120,7 +126,7 @@ public class AppointmentService {
         }
 
         return appointments.stream()
-                .map(appointmentMapper::toAppointmentResponse)
+                .map(record -> appointmentResponseMapper.toAppointmentResponse(record, patientService, doctorService))
                 .toList();
     }
 
@@ -132,6 +138,8 @@ public class AppointmentService {
         appointment.setStatus("CANCELLED");
         appointment = appointmentRepository.save(appointment);
 
-        return appointmentMapper.toAppointmentResponse(appointment);
+        AppointmentResponse appointmentResponse =
+                appointmentResponseMapper.toAppointmentResponse(appointment, patientService, doctorService);
+        return appointmentResponse;
     }
 }

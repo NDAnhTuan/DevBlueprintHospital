@@ -61,7 +61,7 @@ public class PatientService {
         return patients.stream().map(patientMapper::toPatientResponse).toList();
     }
 
-    public Boolean checkId(String patientId){
+    public Boolean checkId(String patientId) {
         return patientRepository.existsById(patientId);
     }
 }

@@ -1,15 +1,17 @@
 package com.devteria.swagger.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.devteria.swagger.dto.ApiResponse;
 import com.devteria.swagger.dto.request.DoctorCreationRequest;
 import com.devteria.swagger.dto.response.DoctorCreationResponse;
 import com.devteria.swagger.service.DoctorService;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/doctors")
@@ -41,8 +43,7 @@ public class DoctorController {
 
     @PutMapping("/{id}")
     ApiResponse<DoctorCreationResponse> updateDoctor(
-            @PathVariable String id,
-            @RequestBody DoctorCreationRequest request) {
+            @PathVariable String id, @RequestBody DoctorCreationRequest request) {
         return ApiResponse.<DoctorCreationResponse>builder()
                 .result(doctorService.updateDoctor(id, request))
                 .build();
@@ -53,4 +54,4 @@ public class DoctorController {
         doctorService.deleteDoctor(id);
         return ApiResponse.<Void>builder().build();
     }
-} 
+}

@@ -1,11 +1,11 @@
 server:
   port: 8083
   servlet:
-    context-path: /swagger
+    context-path: /appointment
 
 spring:
   application:
-    name: swagger-service
+    name: scheduling-service
   datasource:
      url: "jdbc:postgresql://dpg-cvgkvannoe9s73ce60u0-a.singapore-postgres.render.com:5432/appointment_scheduling_swre"
      username: appointment_scheduling_swre_user

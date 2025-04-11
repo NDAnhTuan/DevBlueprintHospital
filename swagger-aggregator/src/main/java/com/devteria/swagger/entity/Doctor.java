@@ -20,10 +20,7 @@ import lombok.experimental.FieldDefaults;
 // @Node("user_profile")
 
 @Entity
-
-@Table(
-        name = "doctors" )
-
+@Table(name = "doctors")
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
