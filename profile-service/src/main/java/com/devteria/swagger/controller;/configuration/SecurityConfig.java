@@ -1,4 +1,4 @@
-package com.devteria.swagger.configuration;
+package com.devteria.scheduling.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_ENDPOINTS = {"/internal/users"};
+    private static final String[] PUBLIC_ENDPOINTS = {"/appointment"};
 
     private final com.devteria.swagger.configuration.CustomJwtDecoder customJwtDecoder;
 

@@ -60,4 +60,8 @@ public class PatientService {
         var patients = patientRepository.findAllByUserId(userId);
         return patients.stream().map(patientMapper::toPatientResponse).toList();
     }
+
+    public Boolean checkId(String patientId){
+        return patientRepository.existsById(patientId);
+    }
 }
