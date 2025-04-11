@@ -17,6 +17,3 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-app:
-  services:
-    patient: "http://localhost:8082/patient"

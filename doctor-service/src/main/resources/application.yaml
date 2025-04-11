@@ -8,7 +8,7 @@ spring:
     name: doctor-service
   datasource:
       url: "jdbc:postgresql://aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
-      username: "rmgatzzkbjipjsiratqv&"
+      username: "postgres.rmgatzzkbjipjsiratqv"
       password: "EF$7cf*dDWBeW3W"
   jpa:
     properties:
@@ -18,6 +18,3 @@ spring:
       ddl-auto: update
     show-sql: true
 
-app:
-  services:
-    doctor: "http://localhost:8084/doctor"

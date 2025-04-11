@@ -101,7 +101,7 @@ public class AppointmentService {
 
         // Use the Mapper
         appointmentMapper.updateAppointment(appointment, request);
-
+        appointmentRepository.save(appointment);
         // check DoctorId và PatientId here => new AppException(ErrorCode.Patient_not_existed)
         AppointmentResponse appointmentResponse =
                 appointmentResponseMapper.toAppointmentResponse(appointment, patientService, doctorService);
@@ -110,6 +110,8 @@ public class AppointmentService {
 
     // Get an appointment by doctor or patient
     // CÁC HÀM GET CẦN GỌI THÊM GET BY ID PATIENT VÀ DOCTOR, NGHĨA LÀ MỌI NGƯỜI PHẢI ĐỊNH NGHĨA RESPONSE
+    // CỦA PATIENT VÀ DOCTOR TRONG APPOINTMENT SERVICE, SAU ĐÓ THÊM VÀO APPOINTMENT RESPONSE (HƯỚNG DẪN TRONG
+    // PROFILE-SERVICE)
     // CỦA PATIENT VÀ DOCTOR TRONG APPOINTMENT SERVICE, SAU ĐÓ THÊM VÀO APPOINTMENT RESPONSE (HƯỚNG DẪN TRONG
     // PROFILE-SERVICE)
     public List<AppointmentResponse> getMyAppointments(String doctorId, String patientId) {

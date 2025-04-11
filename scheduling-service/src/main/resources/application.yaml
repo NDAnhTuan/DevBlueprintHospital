@@ -22,3 +22,7 @@ spring:
     level:
       org.springframework.web: DEBUG
       org.springframework.boot: DEBUG
+app:
+  services:
+    doctor: "http://localhost:8084/doctor"
+    patient: "http://localhost:8082/patient"
