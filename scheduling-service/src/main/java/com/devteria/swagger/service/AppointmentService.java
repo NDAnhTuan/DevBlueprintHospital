@@ -127,6 +127,8 @@ public class AppointmentService {
             appointments = appointmentRepository.findAllByPatientId(patientId);
         }
 
+        System.out.print(appointments);
+
         return appointments.stream()
                 .map(record -> appointmentResponseMapper.toAppointmentResponse(record, patientService, doctorService))
                 .toList();
