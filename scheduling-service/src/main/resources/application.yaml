@@ -7,9 +7,9 @@ spring:
   application:
     name: swagger-service
   datasource:
-     url: "jdbc:postgresql://dpg-cvgkvannoe9s73ce60u0-a.singapore-postgres.render.com:5432/appointment_scheduling_swre"
-     username: appointment_scheduling_swre_user
-     password: yEf1lc3NFAVyNIt5Ae0Fq43Arg5S0Jdn
+     url: "jdbc:postgresql://dpg-d093rl2dbo4c73egp2k0-a.singapore-postgres.render.com:5432/appointment_scheduling_pp4l"
+     username: appointment_scheduling_pp4l_user
+     password: mtOEEG9WLeSg02WvfZ2t6BXh3rEoyhia
   jpa:
     properties:
       hibernate:
