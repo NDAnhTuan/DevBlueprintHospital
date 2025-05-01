@@ -7,9 +7,9 @@ spring:
   application:
     name: doctor-service
   datasource:
-    url: "jdbc:postgresql://aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
-    username: "postgres.rmgatzzkbjipjsiratqv"
-    password: "EF$7cf*dDWBeW3W"
+    url: "jdbc:postgresql://switchback.proxy.rlwy.net:22564/railway"
+    username: "postgres"
+    password: "myqJBawPlRwejknqulMANFSHIPJGnHmt"
   jpa:
     properties:
       hibernate:

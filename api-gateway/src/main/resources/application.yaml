@@ -2,7 +2,7 @@ server:
   port: 8888
 
 app:
-  api-prefix: /api/v1
+  api-prefix: /api/v1/**
 
 spring-doc:
   swagger-ui:
@@ -32,7 +32,7 @@ spring:
           # Dieu kien de gateway map endpoint
           # Khong he co /internal, khong export, vi vay se khong cho gui post profile ;)
           predicates:
-          - Path=${app.api-prefix}/profile/**
+          - Path=${app.api-prefix}
           # Cat di custom prefix (cat api/v1 lay phan sau de routing)
           filters:
           - StripPrefix=2
@@ -41,7 +41,7 @@ spring:
           # Dieu kien de gateway map endpoint
           # Khong he co /internal, khong export, vi vay se khong cho gui post profile ;)
           predicates:
-            - Path=${app.api-prefix}/patient/**
+            - Path=${app.api-prefix}
           # Cat di custom prefix (cat api/v1 lay phan sau de routing)
           filters:
             - StripPrefix=2
@@ -50,7 +50,7 @@ spring:
           # Dieu kien de gateway map endpoint
           # Khong he co /internal, khong export, vi vay se khong cho gui post profile ;)
           predicates:
-            - Path=${app.api-prefix}/swagger/**
+            - Path=${app.api-prefix}
           # Cat di custom prefix (cat api/v1 lay phan sau de routing)
           filters:
             - StripPrefix=2
@@ -59,7 +59,7 @@ spring:
           # Dieu kien de gateway map endpoint
           # Khong he co /internal, khong export, vi vay se khong cho gui post profile ;)
           predicates:
-            - Path=${app.api-prefix}/doctor/**
+            - Path=${app.api-prefix}
           # Cat di custom prefix (cat api/v1 lay phan sau de routing)
           filters:
             - StripPrefix=2
