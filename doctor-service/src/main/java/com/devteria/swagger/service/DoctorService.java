@@ -1,65 +1,21 @@
 package com.devteria.swagger.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
 
 import com.devteria.swagger.dto.request.DoctorCreationRequest;
 import com.devteria.swagger.dto.response.DoctorCreationResponse;
-import com.devteria.swagger.entity.Doctor;
-import com.devteria.swagger.exception.AppException;
-import com.devteria.swagger.exception.ErrorCode;
-import com.devteria.swagger.mapper.DoctorMapper;
-import com.devteria.swagger.repository.DoctorRepository;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
+public interface DoctorService {
 
-@Service
-@RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class DoctorService {
-    DoctorRepository doctorRepository;
-    DoctorMapper doctorMapper;
+    DoctorCreationResponse createDoctor(DoctorCreationRequest request);
 
-    public DoctorCreationResponse createDoctor(DoctorCreationRequest request) {
-        Doctor doctor = doctorMapper.toDoctor(request);
-        doctor = doctorRepository.save(doctor);
-        return doctorMapper.toDoctorCreationResponse(doctor);
-    }
+    DoctorCreationResponse getDoctor(String id);
 
-    public DoctorCreationResponse getDoctor(String id) {
-        Doctor doctor = doctorRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.DOCTOR_NOT_EXISTED));
-        return doctorMapper.toDoctorCreationResponse(doctor);
-    }
+    List<DoctorCreationResponse> getAllDoctors();
 
-    public List<DoctorCreationResponse> getAllDoctors() {
-        return doctorRepository.findAll().stream()
-                .map(doctorMapper::toDoctorCreationResponse)
-                .collect(Collectors.toList());
-    }
+    DoctorCreationResponse updateDoctor(String id, DoctorCreationRequest request);
 
-    public DoctorCreationResponse updateDoctor(String id, DoctorCreationRequest request) {
-        Doctor existingDoctor =
-                doctorRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.DOCTOR_NOT_EXISTED));
+    void deleteDoctor(String id);
 
-        Doctor updatedDoctor = doctorMapper.toDoctor(request);
-        updatedDoctor.setId(id);
-
-        updatedDoctor = doctorRepository.save(updatedDoctor);
-        return doctorMapper.toDoctorCreationResponse(updatedDoctor);
-    }
-
-    public void deleteDoctor(String id) {
-        if (!doctorRepository.existsById(id)) {
-            throw new AppException(ErrorCode.DOCTOR_NOT_EXISTED);
-        }
-        doctorRepository.deleteById(id);
-    }
-
-    public Boolean checkId(String doctorId) {
-        return doctorRepository.existsById(doctorId);
-    }
+    Boolean checkId(String doctorId);
 }
