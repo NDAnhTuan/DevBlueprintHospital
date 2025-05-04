@@ -11,7 +11,6 @@ import com.devteria.swagger.entity.Doctor;
 import com.devteria.swagger.exception.DoctorNotFoundException;
 import com.devteria.swagger.mapper.DoctorMapper;
 import com.devteria.swagger.repository.DoctorRepository;
-import com.devteria.swagger.validator.DoctorValidator;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +22,9 @@ import lombok.experimental.FieldDefaults;
 public class DoctorServiceImpl implements DoctorService {
     DoctorRepository doctorRepository;
     DoctorMapper doctorMapper;
-    DoctorValidator doctorValidator;
 
     @Override
     public DoctorCreationResponse createDoctor(DoctorCreationRequest request) {
-        doctorValidator.validate(request);
         Doctor doctor = doctorMapper.toDoctor(request);
         doctor = doctorRepository.save(doctor);
         return doctorMapper.toDoctorCreationResponse(doctor);
@@ -48,7 +45,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorCreationResponse updateDoctor(String id, DoctorCreationRequest request) {
-        doctorValidator.validate(request);
         findDoctorById(id); // Verify doctor exists
 
         Doctor updatedDoctor = doctorMapper.toDoctor(request);
