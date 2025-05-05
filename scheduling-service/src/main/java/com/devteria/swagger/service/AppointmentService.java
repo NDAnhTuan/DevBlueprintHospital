@@ -15,6 +15,7 @@ import com.devteria.swagger.exception.AppException;
 import com.devteria.swagger.exception.ErrorCode;
 import com.devteria.swagger.mapper.AppointmentMapper;
 import com.devteria.swagger.repository.AppointmentRepository;
+import com.devteria.swagger.repository.httpCilent.*;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
-public class AppointmentService {
+public class AppointmentService implements AppointmentMapper {
     AppointmentRepository appointmentRepository;
     AppointmentMapper appointmentMapper;
+    DoctorService doctorService;
+    PatientService patientService;
 
     // Validate the appointment time range, must be from 07:00 to 16:00
+
     private void validateAppointmentTime(LocalDateTime appointmentDateTime) {
         // Skip validation if it is null
         if (appointmentDateTime == null) {
@@ -67,9 +71,7 @@ public class AppointmentService {
 
         Appointment appointment = appointmentMapper.toAppointment(request);
 
-
         // check DoctorId và PatientId here => new AppException(ErrorCode.Patient_not_existed)
-
 
         return appointmentMapper.toAppointmentResponse(appointmentRepository.save(appointment));
     }
@@ -105,7 +107,8 @@ public class AppointmentService {
 
     // Get an appointment by doctor or patient
     // CÁC HÀM GET CẦN GỌI THÊM GET BY ID PATIENT VÀ DOCTOR, NGHĨA LÀ MỌI NGƯỜI PHẢI ĐỊNH NGHĨA RESPONSE
-    // CỦA PATIENT VÀ DOCTOR TRONG APPOINTMENT SERVICE, SAU ĐÓ THÊM VÀO APPOINTMENT RESPONSE (HƯỚNG DẪN TRONG PROFILE-SERVICE)
+    // CỦA PATIENT VÀ DOCTOR TRONG APPOINTMENT SERVICE, SAU ĐÓ THÊM VÀO APPOINTMENT RESPONSE (HƯỚNG DẪN TRONG
+    // PROFILE-SERVICE)
     public List<AppointmentResponse> getMyAppointments(String doctorId, String patientId) {
         if (doctorId == null && patientId == null) {
             throw new AppException(ErrorCode.INVALID_REQUEST);
@@ -133,5 +136,29 @@ public class AppointmentService {
         appointment = appointmentRepository.save(appointment);
 
         return appointmentMapper.toAppointmentResponse(appointment);
+    }
+
+    @Override
+    public Appointment toAppointment(AppointmentRequest request) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toAppointment'");
+    }
+
+    @Override
+    public AppointmentResponse toAppointmentResponse(Appointment appointment) {
+        AppointmentResponse response = new AppointmentResponse();
+        response.setId(appointment.getId());
+        response.setAppointmentDateTime((appointment.getAppointmentDateTime()));
+        response.setDoctor(doctorService.getDoctorResponse(appointment.getDoctorId()));
+        response.setPatient(patientService.getPatientResponse(appointment.getPatientId()));
+        response.setReason(appointment.getReason());
+        response.setStatus(appointment.getStatus());
+        return response;
+    }
+
+    @Override
+    public void updateAppointment(Appointment appointment, AppointmentRequest request) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateAppointment'");
     }
 }

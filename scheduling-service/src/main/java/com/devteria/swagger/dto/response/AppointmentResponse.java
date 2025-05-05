@@ -12,8 +12,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AppointmentResponse {
     String id;
-    String patientId;
-    String doctorId;
+    PatientResponse patient;
+    DoctorCreationResponse doctor;
     LocalDateTime appointmentDateTime;
     String reason;
     String status;
