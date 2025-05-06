@@ -12,13 +12,21 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @RestController
+@RequestMapping("/internal")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 // Controller cho các api không public
 public class InternalPatientController {
     PatientService patientService;
 
-    @PostMapping("/internal/patient")
+    @GetMapping("/{id}")
+    ApiResponse<PatientResponse> getPatient(@PathVariable String id) {
+        return ApiResponse.<PatientResponse>builder()
+                .result(patientService.getPatient(id))
+                .build();
+    }
+
+    @PostMapping("")
     ApiResponse<PatientResponse> createPatient(@RequestBody PatientCreationRequest request) {
         return ApiResponse.<PatientResponse>builder()
                 .result(patientService.createPatient(request))

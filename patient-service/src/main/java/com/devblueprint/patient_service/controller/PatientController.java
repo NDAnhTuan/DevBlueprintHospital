@@ -20,21 +20,21 @@ import lombok.experimental.FieldDefaults;
 public class PatientController {
     PatientService patientService;
 
-    @GetMapping("/patient/{id}")
+    @GetMapping("/{id}")
     ApiResponse<PatientResponse> getPatient(@PathVariable String id) {
         return ApiResponse.<PatientResponse>builder()
                 .result(patientService.getPatient(id))
                 .build();
     }
 
-    @GetMapping("/patient")
+    @GetMapping("")
     ApiResponse<List<PatientResponse>> getAllPatients() {
         return ApiResponse.<List<PatientResponse>>builder()
                 .result(patientService.getAllPatients())
                 .build();
     }
 
-    @GetMapping("/patient/my-patient")
+    @GetMapping("/my-patient")
     ApiResponse<List<PatientResponse>> getMyPatient() {
         return ApiResponse.<List<PatientResponse>>builder()
                 .result(patientService.getMyPatient())

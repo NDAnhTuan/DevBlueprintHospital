@@ -123,7 +123,7 @@ public class AppointmentService implements AppointmentMapper {
         }
 
         return appointments.stream()
-                .map(appointmentMapper::toAppointmentResponse)
+                .map(appointment -> toAppointmentResponse(appointment))
                 .toList();
     }
 
@@ -149,8 +149,8 @@ public class AppointmentService implements AppointmentMapper {
         AppointmentResponse response = new AppointmentResponse();
         response.setId(appointment.getId());
         response.setAppointmentDateTime((appointment.getAppointmentDateTime()));
-        response.setDoctor(doctorService.getDoctorResponse(appointment.getDoctorId()));
-        response.setPatient(patientService.getPatientResponse(appointment.getPatientId()));
+        response.setDoctor(doctorService.getDoctorResponse(appointment.getDoctorId()).getResult());
+        response.setPatient(patientService.getPatientResponse(appointment.getPatientId()).getResult());
         response.setReason(appointment.getReason());
         response.setStatus(appointment.getStatus());
         return response;
