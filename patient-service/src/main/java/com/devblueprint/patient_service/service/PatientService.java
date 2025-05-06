@@ -53,13 +53,6 @@ public class PatientService {
         return patients.stream().map(patientMapper::toPatientResponse).toList();
     }
 
-    public List<PatientResponse> getMyPatient() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();
-
-        var patients = patientRepository.findAllByUserId(userId);
-        return patients.stream().map(patientMapper::toPatientResponse).toList();
-    }
 
     public Boolean checkId(String patientId) {
         return patientRepository.existsById(patientId);

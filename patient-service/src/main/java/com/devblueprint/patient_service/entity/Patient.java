@@ -22,7 +22,7 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     String userId;
 
     String firstName;

@@ -2,9 +2,8 @@ package com.devblueprint.patient_service.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.devblueprint.patient_service.dto.request.PatientCreationRequest;
+import org.springframework.web.bind.annotation.*;
 
 import com.devblueprint.patient_service.dto.ApiResponse;
 import com.devblueprint.patient_service.dto.response.PatientResponse;
@@ -20,6 +19,12 @@ import lombok.experimental.FieldDefaults;
 public class PatientController {
     PatientService patientService;
 
+    @GetMapping()
+    ApiResponse<List<PatientResponse>> getAllPatients() {
+        return ApiResponse.<List<PatientResponse>>builder()
+                .result(patientService.getAllPatients())
+                .build();
+    }
     @GetMapping("/{id}")
     ApiResponse<PatientResponse> getPatient(@PathVariable String id) {
         return ApiResponse.<PatientResponse>builder()
@@ -27,17 +32,13 @@ public class PatientController {
                 .build();
     }
 
-    @GetMapping("")
-    ApiResponse<List<PatientResponse>> getAllPatients() {
-        return ApiResponse.<List<PatientResponse>>builder()
-                .result(patientService.getAllPatients())
+    @PostMapping()
+    ApiResponse<PatientResponse> createPatient(@RequestBody PatientCreationRequest request) {
+        return ApiResponse.<PatientResponse>builder()
+                .result(patientService.createPatient(request))
                 .build();
     }
 
-    @GetMapping("/my-patient")
-    ApiResponse<List<PatientResponse>> getMyPatient() {
-        return ApiResponse.<List<PatientResponse>>builder()
-                .result(patientService.getMyPatient())
-                .build();
-    }
+
+
 }

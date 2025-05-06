@@ -102,7 +102,7 @@ public class AppointmentService implements AppointmentMapper {
         // check DoctorId và PatientId here => new AppException(ErrorCode.Patient_not_existed)
 
         Appointment updated = appointmentRepository.save(appointment);
-        return appointmentMapper.toAppointmentResponse(updated);
+        return toAppointmentResponse(updated);
     }
 
     // Get an appointment by doctor or patient

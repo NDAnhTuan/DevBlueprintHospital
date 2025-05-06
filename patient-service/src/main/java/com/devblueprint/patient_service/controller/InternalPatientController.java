@@ -26,13 +26,6 @@ public class InternalPatientController {
                 .build();
     }
 
-    @PostMapping("")
-    ApiResponse<PatientResponse> createPatient(@RequestBody PatientCreationRequest request) {
-        return ApiResponse.<PatientResponse>builder()
-                .result(patientService.createPatient(request))
-                .build();
-    }
-
     @GetMapping("/check-id")
     ApiResponse<Boolean> checkExistingPatient(@PathVariable String patientId) {
         return ApiResponse.<Boolean>builder()
